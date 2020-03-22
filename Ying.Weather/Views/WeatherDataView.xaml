@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Ying.Weather.Views.WeatherDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ying.Weather.Views"
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:Ying.Weather.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance vm:WeatherDataViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding WeaResModel.CityInfo.City,StringFormat={}{0}天气预报}"></TextBlock>
+            <TextBlock Grid.Row="1" >
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="今日天气：{0}, 空气质量：{1}, 温度：{2}℃,">
+                        <Binding Path="WeaResModel.CityInfo.City"/>
+                        <Binding Path="WeaResModel.Data.Quality"/>
+                        <Binding Path="WeaResModel.Data.Wendu"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListView ItemsSource="{Binding WeatherItemViewModels}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl s:View.Model="{Binding}"></ContentControl>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</UserControl>

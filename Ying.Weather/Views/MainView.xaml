@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Ying.Weather.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:Ying.Weather.ViewModels"
+             xmlns:local="clr-namespace:Ying.Weather.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance vm:MainViewModel}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <ContentControl s:View.Model="{Binding CitiesViewModel}"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <ContentControl s:View.Model="{Binding WeatherDataViewModel}"/>
+        </Grid>
+    </Grid>
+</UserControl>
