@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Ying.Weather.Models
 {
@@ -54,8 +56,24 @@ namespace Ying.Weather.Models
         /// </summary>
         public string Type { get; set; }
         /// <summary>
+        /// 天气
+        /// </summary>
+        [JsonIgnore]
+        public PackIconKind PackIconKind => Type switch
+        {
+            string s when s.Contains("晴") => PackIconKind.WeatherSunny,
+            string s when s.Contains("阴") => PackIconKind.WeatherCloudy,
+            string s when s.Contains("云") => PackIconKind.WeatherPartlyCloudy,
+            string s when s.Contains("雨") => PackIconKind.WeatherRainy,
+            string s when s.Contains("雪") => PackIconKind.WeatherSnowy,
+            string s when s.Contains("风") => PackIconKind.WeatherWindy,
+            string s when s.Contains("雷") => PackIconKind.WeatherStorm,
+            _ => PackIconKind.CrosshairsUnknown,
+        };
+        /// <summary>
         /// 注意
         /// </summary>
         public string Notice { get; set; }
+
     }
 }

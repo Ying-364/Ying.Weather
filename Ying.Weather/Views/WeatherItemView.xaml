@@ -18,6 +18,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" >
                 <TextBlock.Text>
@@ -27,18 +28,21 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <TextBlock Grid.Row="1" Text="{Binding WeatherInfo.Type}"></TextBlock>
+            <StackPanel x:Name="TypeStackPanel" Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Text="{Binding WeatherInfo.Type}"></TextBlock>
+                <md:PackIcon Kind="{Binding WeatherInfo.PackIconKind}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </md:PackIcon>
+            </StackPanel>
             <TextBlock Grid.Row="2" >
                 <TextBlock.Text>
-                    <MultiBinding StringFormat="温度：{0}~{1}℃,">
+                    <MultiBinding StringFormat="温度：{0}~{1},">
                         <Binding Path="WeatherInfo.Low"/>
                         <Binding Path="WeatherInfo.High"/>
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
             <TextBlock Grid.Row="3" Text="{Binding WeatherInfo.Aqi,StringFormat={}空气指数：{0}}"></TextBlock>
-            <TextBlock Grid.Row="4" Text="{Binding WeatherInfo.Notice,StringFormat={}注意：{0}}"></TextBlock>
-            <TextBlock Grid.Row="5" >
+            <TextBlock Grid.Row="4" TextWrapping = "Wrap">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="风向：{0} 风级：{1},">
                         <Binding Path="WeatherInfo.Fx"/>
@@ -46,6 +50,7 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
+            <TextBlock Grid.Row="5" Text="{Binding WeatherInfo.Notice,StringFormat={}注意：{0}}"></TextBlock>
         </Grid>
     </md:Card>
 </UserControl>
