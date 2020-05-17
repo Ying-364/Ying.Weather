@@ -25,5 +25,10 @@ namespace Ying.Weather.ViewModels
             this.DisplayName = "sojson天气";
             this.ActivateItem(_container.Get<MainViewModel>());
         }
+
+        public void CLoseWindow()
+        {
+            this.RequestClose();
+        }
     }
 }

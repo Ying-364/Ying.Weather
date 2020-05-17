@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resource\Images\window_bg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Images\window_bg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="3.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.2.6" />

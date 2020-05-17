@@ -7,9 +7,32 @@
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Ying.Weather.Views"
         mc:Ignorable="d"
-        ShowInTaskbar="False"
-        Title="ConductorView" Height="450" Width="800">
+        ShowInTaskbar="False" WindowStyle="None" ResizeMode="CanResize"
+        WindowChrome.WindowChrome="{DynamicResource WindowChromeKey}"
+        MinHeight="400" MinWidth="600">
+    <Window.Resources>
+        <ResourceDictionary>
+            <WindowChrome x:Key="WindowChromeKey">
+                <WindowChrome.ResizeBorderThickness>
+                    <Thickness>5</Thickness>
+                </WindowChrome.ResizeBorderThickness>
+                <WindowChrome.CaptionHeight>0</WindowChrome.CaptionHeight>
+            </WindowChrome>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <ContentControl s:View.Model="{Binding ActiveItem}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid MouseMove="Grid_MouseMove" Background="{DynamicResource PrimaryHueMidBrush}">
+            <Button Width="35" Height="35" HorizontalAlignment="Right"
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    Background="Transparent" BorderBrush="Transparent"
+                    Command="{s:Action CLoseWindow}" Cursor="Hand">
+                <md:PackIcon Kind="Close"></md:PackIcon>
+            </Button>
+        </Grid>
+        <ContentControl Grid.Row="1" s:View.Model="{Binding ActiveItem}"/>
     </Grid>
 </Window>

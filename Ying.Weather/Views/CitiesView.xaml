@@ -15,7 +15,12 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Text="{Binding SelectCity.City_name}" ></TextBox>
+        <Border Grid.Row="0" Margin="10">
+            <TextBox Text="{Binding SelectCity.City_name}"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            </TextBox>
+        </Border>
         <TreeView Grid.Row="2" ItemsSource="{Binding CityInfos}" SelectedItemChanged="{s:Action CityChanged}" >
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Childs}">

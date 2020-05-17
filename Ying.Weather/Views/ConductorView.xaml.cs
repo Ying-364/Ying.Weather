@@ -21,5 +21,17 @@ namespace Ying.Weather.Views
         {
             InitializeComponent();
         }
+
+        private void Grid_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                if (this.WindowState == WindowState.Maximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                }
+                this.DragMove();
+            }
+        }
     }
 }
