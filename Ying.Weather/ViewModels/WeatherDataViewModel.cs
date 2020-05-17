@@ -3,6 +3,7 @@ using StyletIoC;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Ying.Weather.Models;
 using Ying.Weather.Utils;
 
@@ -24,16 +25,18 @@ namespace Ying.Weather.ViewModels
         {
             Execute.OnUIThreadSync(async() =>
             {
+                WeatherItemViewModels.Clear();
+                GC.Collect();
+
                 WeaResModel = await WeatherUtil.GetWeathers(message);
 
                 if (WeaResModel?.Data?.Forecast != null)
                 {
-                    WeatherItemViewModels.Clear();
-
                     foreach (var item in WeaResModel.Data.Forecast)
                     {
                         var ivm = _container.Get<WeatherItemViewModel>();
                         ivm.WeatherInfo = item;
+                        await Task.Delay(200);
                         WeatherItemViewModels.Add(ivm);
                     }
                 }

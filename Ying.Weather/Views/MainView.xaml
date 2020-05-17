@@ -12,8 +12,8 @@
              d:DataContext="{d:DesignInstance vm:MainViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <ContentControl s:View.Model="{Binding CitiesViewModel}"/>
