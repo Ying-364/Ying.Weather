@@ -14,7 +14,7 @@
         <EventTrigger RoutedEvent="Loaded">
             <BeginStoryboard>
                 <Storyboard>
-                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:1" From="-300,0,0,0" To="0">
+                    <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.8" From="-300,0,0,0" To="0">
                         <ThicknessAnimation.EasingFunction>
                             <BackEase EasingMode="EaseInOut"></BackEase>
                         </ThicknessAnimation.EasingFunction>

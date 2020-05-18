@@ -26,6 +26,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid MouseMove="Grid_MouseMove" Background="{DynamicResource PrimaryHueMidBrush}">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="{Binding DisplayName}" FontSize="18"></TextBlock>
             <Button Width="35" Height="35" HorizontalAlignment="Right"
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
                     Background="Transparent" BorderBrush="Transparent"

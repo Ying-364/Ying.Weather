@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:Ying.Weather.Views"
              xmlns:s="https://github.com/canton7/Stylet"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:lcw="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:vm="clr-namespace:Ying.Weather.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="300"
+             d:DesignHeight="400" d:DesignWidth="600"
              d:DataContext="{d:DesignInstance vm:WeatherDataViewModel}">
     <Grid>
         <Grid.RowDefinitions>
@@ -31,19 +32,35 @@
                 </TextBlock.Text>
             </TextBlock>
         </Grid>
-        <Grid Grid.Row="1">
-            <ListView ItemsSource="{Binding WeatherItemViewModels}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl s:View.Model="{Binding}"></ContentControl>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Expander Header="图表" Background="Transparent" Foreground="{StaticResource PrimaryHueMidBrush}" Visibility="{Binding ChartVisibility}">
+                    <lcw:CartesianChart Height="400">
+                        <lcw:CartesianChart.Series>
+                            <lcw:LineSeries Values="{Binding LowValues}" DataLabels="True" LineSmoothness="1" PointGeometrySize="15" Foreground="Red"/>
+                            <lcw:LineSeries Values="{Binding HighValues}" DataLabels="True" LineSmoothness="1" PointGeometrySize="15" Foreground="Green"/>
+                        </lcw:CartesianChart.Series>
+                        <lcw:CartesianChart.AxisY>
+                            <lcw:Axis Title="温度" Foreground="White" FontSize="15"></lcw:Axis>
+                        </lcw:CartesianChart.AxisY>
+                        <lcw:CartesianChart.AxisX>
+                            <lcw:Axis Title="日期" Foreground="White" FontSize="15" Labels="{Binding Ymds}"></lcw:Axis>
+                        </lcw:CartesianChart.AxisX>
+                    </lcw:CartesianChart>
+                </Expander>
+                <ListView ItemsSource="{Binding WeatherItemViewModels}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl s:View.Model="{Binding}"></ContentControl>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

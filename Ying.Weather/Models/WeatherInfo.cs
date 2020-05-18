@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -20,9 +21,19 @@ namespace Ying.Weather.Models
         /// </summary>
         public string High { get; set; }
         /// <summary>
+        /// 最高温度
+        /// </summary>
+        [JsonIgnore]
+        public double HighNum => Convert.ToDouble(High?.Split(' ').Last().Replace("℃", string.Empty));
+        /// <summary>
         /// 最低温度
         /// </summary>
         public string Low { get; set; }
+        /// <summary>
+        /// 最低温度
+        /// </summary>
+        [JsonIgnore]
+        public double LowNum => Convert.ToDouble(Low?.Split(' ').Last().Replace("℃", string.Empty));
         /// <summary>
         /// 年月日
         /// </summary>
