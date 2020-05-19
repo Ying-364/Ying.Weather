@@ -19,8 +19,8 @@ namespace Ying.Weather.ViewModels
         private readonly IEventAggregator _eventAggregator;
         public WeaResModel WeaResModel { get; set; }
         public BindableCollection<WeatherItemViewModel> WeatherItemViewModels { get; set; }
-        public ChartValues<double> LowValues => GetChartValues(p => p.WeatherInfo.LowNum);
-        public ChartValues<double> HighValues => GetChartValues(p => p.WeatherInfo.HighNum);
+        public ChartValues<double> LowValues { get; set; } = new ChartValues<double>();
+        public ChartValues<double> HighValues { get; set; } = new ChartValues<double>();
         public List<string> Ymds => WeatherItemViewModels?.Select(p => p.WeatherInfo.Ymd)?.ToList();
 
         public Visibility ChartVisibility { get; set; } = Visibility.Hidden;
@@ -35,41 +35,31 @@ namespace Ying.Weather.ViewModels
         {
             Execute.OnUIThreadSync(async() =>
             {
-                WeatherItemViewModels.Clear();
+                WeatherItemViewModels?.Clear();
+                LowValues?.Clear();
+                HighValues?.Clear();
                 GC.Collect();
 
                 WeaResModel = await WeatherUtil.GetWeathers(message);
 
                 if (WeaResModel?.Data?.Forecast != null)
                 {
+                    ChartVisibility = Visibility.Visible;
                     foreach (var item in WeaResModel.Data.Forecast)
                     {
                         var ivm = _container.Get<WeatherItemViewModel>();
                         ivm.WeatherInfo = item;
                         await Task.Delay(200);
                         WeatherItemViewModels.Add(ivm);
+                        LowValues.Add(item.LowNum);
+                        HighValues.Add(item.HighNum);
                     }
                 }
-
-                ChartVisibility = WeatherItemViewModels?.Count > 0 ? Visibility.Visible : Visibility.Hidden;
+                else
+                {
+                    ChartVisibility = Visibility.Hidden;
+                }
             });
-        }
-
-        private ChartValues<double> GetChartValues(Func<WeatherItemViewModel, double> selector)
-        {
-            var cvs = new ChartValues<double>();
-
-            if (WeatherItemViewModels?.Count <= 0)
-            {
-                return cvs;
-            }
-
-            foreach (var item in WeatherItemViewModels?.Select(selector))
-            {
-                cvs.Add(item);
-            }
-
-            return cvs;
         }
     }
 }
