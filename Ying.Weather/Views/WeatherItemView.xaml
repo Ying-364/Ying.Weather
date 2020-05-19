@@ -8,7 +8,7 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vm="clr-namespace:Ying.Weather.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="250" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance vm:WeatherItemViewModel}">
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="Loaded">
@@ -24,7 +24,7 @@
         </EventTrigger>
     </UserControl.Triggers>
     <md:Card Background="Transparent">
-        <Border CornerRadius="15" Padding="15" Background="#7FFFFFFF">
+        <Border CornerRadius="15" Padding="15" Margin="15" Background="#7FFFFFFF">
             <Grid x:Name="Grid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -44,7 +44,7 @@
                 </TextBlock>
                 <StackPanel x:Name="TypeStackPanel" Grid.Row="1" Orientation="Horizontal">
                     <TextBlock Text="{Binding WeatherInfo.Type}"></TextBlock>
-                    <md:PackIcon Kind="{Binding WeatherInfo.PackIconKind}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <md:PackIcon Kind="{Binding WeatherInfo.PackIconKind}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0">
                     </md:PackIcon>
                 </StackPanel>
                 <TextBlock Grid.Row="2" >

@@ -8,7 +8,7 @@
              xmlns:vm="clr-namespace:Ying.Weather.ViewModels"
              xmlns:local="clr-namespace:Ying.Weather.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450" d:DesignWidth="200"
              d:DataContext="{d:DesignInstance vm:CitiesViewModel}">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Margin="10">
-            <TextBox Text="{Binding SelectCity.City_name}"
+            <TextBox Text="{Binding SelectCity.City_name}" IsReadOnly="True"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             </TextBox>

@@ -48,7 +48,7 @@
                         </lcw:CartesianChart.AxisX>
                     </lcw:CartesianChart>
                 </Expander>
-                <ListView ItemsSource="{Binding WeatherItemViewModels}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView ItemsSource="{Binding WeatherItemViewModels}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel/>
